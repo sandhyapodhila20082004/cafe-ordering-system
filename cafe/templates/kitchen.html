@@ -1,0 +1,19 @@
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+<h1>👨‍🍳 Kitchen Orders</h1>
+
+{% for o in orders %}
+<meta http-equiv="refresh"content="5">
+<div style="background:white; margin:10px; padding:10px; border-radius:10px;">
+
+    <h2>Order #{{ o["id"] }}</h2>
+
+    {% for i in o["items"] %}
+        <p>{{ i.item }} - ₹{{ i.price }}</p>
+    {% endfor %}
+
+    <p><b>Status:</b> {{ o["status"] }}</p>
+
+</div>
+
+{% endfor %}

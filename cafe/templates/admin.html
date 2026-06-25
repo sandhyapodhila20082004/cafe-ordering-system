@@ -1,0 +1,48 @@
+<meta http-equiv="refresh"content="5">
+<h1>📦 Cafe Orders Dashboard</h1>
+
+{% for o in orders %}
+<div style="border:1px solid #ccc; padding:10px; margin:10px;">
+
+    <h3>🆔 Order #{{ o["id"] }}</h3>
+
+    <p>👤 {{ o["name"] }}</p>
+    <p>📞 {{ o["phone"] }}</p>
+    <p>🏠 {{ o["address"] }}</p>
+
+    <hr>
+
+    {% for i in o["items"] %}
+        <p>{{ i.item }} - ₹{{ i.price }}</p>
+    {% endfor %}
+
+    <h4>💰 Total: ₹{{ o["total"] }}</h4>
+
+    <p>📌 Status: <b>{{ o["status"] }}</b></p>
+
+
+<form action="/update_status/{{ o['id'] }}" method="post">
+
+    <select name="status">
+        <option>Pending</option>
+        <option>Preparing</option>
+        <option>Ready</option>
+        <option>Delivered</option>
+    </select>
+
+    <button type="submit">Update</button>
+
+<audio id="ding">
+  <source src="https://actions.google.com/sounds/v1/alarms/beep_short.ogg" type="audio/ogg">
+</audio>
+
+<script>
+setInterval(() => {
+    document.getElementById("ding").play();
+}, 10000);
+</script>
+
+</form>
+</div>
+{% endfor %}
+
